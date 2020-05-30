@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e08be1df2b4f54ff6a64733f272df452",
+    "revision": "effc1501cc84641eed77770ffc9275ee",
     "url": "/papayapp-analytics/index.html"
   },
   {
-    "revision": "047cdbb776ce7c609886",
+    "revision": "806e9b409ee800fb5e57",
     "url": "/papayapp-analytics/static/css/main.67cd550b.chunk.css"
   },
   {
-    "revision": "ca4995432aeb3b033a70",
-    "url": "/papayapp-analytics/static/js/2.4f51e8d9.chunk.js"
+    "revision": "68c965b26381aa92bd05",
+    "url": "/papayapp-analytics/static/js/2.b18ca86a.chunk.js"
   },
   {
     "revision": "78aa0676509153305bde072ed1e9cb1c",
-    "url": "/papayapp-analytics/static/js/2.4f51e8d9.chunk.js.LICENSE.txt"
+    "url": "/papayapp-analytics/static/js/2.b18ca86a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "047cdbb776ce7c609886",
-    "url": "/papayapp-analytics/static/js/main.addc7aeb.chunk.js"
+    "revision": "806e9b409ee800fb5e57",
+    "url": "/papayapp-analytics/static/js/main.625c1012.chunk.js"
   },
   {
     "revision": "dc68b5e38b816c23a6e6",
