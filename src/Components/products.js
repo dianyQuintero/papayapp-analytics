@@ -7,6 +7,8 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 var products= [];
 var grafica1 = [];
+var grafica2 = [];
+
 
 export default class Productos extends React.Component{
 
@@ -15,7 +17,9 @@ export default class Productos extends React.Component{
         this.state = {
           prestamos: [],
           productos: [],
-          grafProd:[],          
+          grafProd:[], 
+          grafAtencion:[]
+         
         };
       }
 
@@ -24,15 +28,25 @@ export default class Productos extends React.Component{
         .get()
         .then(querySnapshot => {
           const data = querySnapshot.docs.map(doc => doc.data());
+          var atendidos = 0; 
           data.forEach(d=>{
             if(!products.includes(d.producto)){
               products.push(d.producto)
             }
-            this.setState({
-              prestamos:data,
-              productos:products
-            })
+            if(d.presta !== null ){
+                atendidos++;
+            }
+            
+
           });
+          var noAtendidos = data.length - atendidos;
+          grafica2.push({y: ((noAtendidos*100)/data.length), label :"Pedidos sin atender"})
+          grafica2.push({y: ((atendidos*100)/data.length), label :"Pedidos atendidos"})
+          this.setState({
+                prestamos:data,
+                productos:products,      
+                grafAtencion:grafica2,      
+              })
           if(this.state.productos.length !== 0){
             this.state.productos.forEach(e=>{
             db.collection("prestamos").where("producto","==", ""+e).
@@ -84,6 +98,21 @@ export default class Productos extends React.Component{
 				dataPoints: this.state.grafProd
 			}]
         }
+        const optionsAtencion = {
+			animationEnabled: true,
+			exportEnabled: true,
+			theme: "light2", // "light1", "dark1", "dark2"
+			title:{
+				text: "% Pedidos sin Atender"
+			},
+			data: [{
+				type: "pie",
+				indexLabel: "{label}: {y}%",		
+                startAngle: -90,
+                yValueFormatString: "####.00",
+				dataPoints: this.state.grafAtencion
+			}]
+		}
         return(
             <div className="container">
             <div className="row">
@@ -131,6 +160,25 @@ export default class Productos extends React.Component{
               </div>
           </div>
         </div>
+        <br></br>
+        <div className="row" >
+            <div className="col-12">
+            <div  id="Card1" className="card border-left-primary shadow h-100 py-2">
+                    <div  className="card-body">
+                      <div  className="row no-gutters align-items-center">
+                        <div  className="col mr-2">
+                          <div  id="titCard1" className="text-xs font-weight-bold text-uppercase mb-1">Pedidos sin responder</div>
+                          <div  className="card-body">
+                            <CanvasJSChart options = {optionsAtencion}/>
+                            </div>
+                            <h5>Total Pedidos: {this.state.prestamos.length}</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            </div>
+            <br></br>
         </div>
         );
       }

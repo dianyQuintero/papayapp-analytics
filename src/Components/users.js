@@ -17,7 +17,7 @@ export default class Usuarios extends React.Component{
           prestamos: [],
           usuarios: [],
           grafPide:[],
-          grafPresta:[]
+          grafPresta:[],
 
         };
       }
@@ -40,22 +40,22 @@ export default class Usuarios extends React.Component{
               this.state.usuarios.forEach(u=>{
                 var countPide = 0;
                 var countPresta = 0;
-
+                
                 this.state.prestamos.forEach(p=>{
                   if(u.id===p.recibe.id){
                     countPide++;
                   }
-                  if(p.presta !== null && u.id===p.presta.id){
-                    countPresta++;
-                  }
+                  if(p.presta !== null && u.id===p.presta.id) {
+                    countPresta++;}
                 })
                 grafica1.push({label: u.data().email, y: countPide})
                 grafica2.push({label: u.data().email, y: countPresta})
+
+              })                
                 this.setState({
-                  grafPide : grafica1,
-                  grafPresta : grafica2
-                })
-              })
+                    grafPide : grafica1,
+                    grafPresta : grafica2,
+                  })
             } 
         }); 
         });
@@ -166,8 +166,6 @@ export default class Usuarios extends React.Component{
 				dataPoints: this.state.grafPresta
 			}]
         }
-
-
           return(
             <div className="container">
             <div className="row" >
@@ -178,9 +176,6 @@ export default class Usuarios extends React.Component{
                         <div  className="col mr-2">
                           <div  id="titCard2" className="text-xs font-weight-bold text-uppercase mb-1">Usuario que más pide</div>
                             <div  className="h5 mb-0 font-weight-bold text-gray-800">{this.masPide()}</div>
-                        </div>
-                        <div  className="col-auto">
-                          <i  className="fas fa-calendar fa-2x text-gray-300"></i>
                         </div>
                       </div>
                     </div>
@@ -193,9 +188,6 @@ export default class Usuarios extends React.Component{
                         <div  className="col mr-2">
                           <div  id="titCard3" className="text-xs font-weight-bold text-uppercase mb-1">Usuario que menos pide</div>
                             <div  className="h5 mb-0 font-weight-bold text-gray-800">{this.menosPide()}</div>
-                        </div>
-                        <div  className="col-auto">
-                          <i  className="fas fa-calendar fa-2x text-gray-300"></i>
                         </div>
                       </div>
                     </div>
@@ -217,9 +209,6 @@ export default class Usuarios extends React.Component{
                           <div  id="titCard2" className="text-xs font-weight-bold text-uppercase mb-1">Usuario que más presta</div>
                             <div  className="h5 mb-0 font-weight-bold text-gray-800">{this.masPresta()}</div>
                         </div>
-                        <div  className="col-auto">
-                          <i  className="fas fa-calendar fa-2x text-gray-300"></i>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -231,9 +220,6 @@ export default class Usuarios extends React.Component{
                         <div  className="col mr-2">
                           <div  id="titCard3" className="text-xs font-weight-bold text-uppercase mb-1">Usuario que menos presta</div>
                             <div  className="h5 mb-0 font-weight-bold text-gray-800">{this.menosPresta()}</div>
-                        </div>
-                        <div  className="col-auto">
-                          <i  className="fas fa-calendar fa-2x text-gray-300"></i>
                         </div>
                       </div>
                     </div>
