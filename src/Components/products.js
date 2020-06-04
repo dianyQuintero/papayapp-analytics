@@ -149,12 +149,12 @@ export default class Productos extends React.Component{
                   <h4 className="text" >Porcentaje de pedidos por producto</h4>
                   <br></br>
                   {this.state.grafProd.map(function(e){
-                    return <div>
-                      <h4  className="small font-weight-bold">{e.label} <span  className="float-right">{e.porcentaje}%</span></h4>
-                      <div  className="progress mb-4">
-                      <div  className="progress-bar" role="progressbar" style={{width: e.porcentaje +'%' }} aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                    </div>;
+                    return(<div>
+                        <h4  className="small font-weight-bold">{e.label} <span  className="float-right">{e.porcentaje}%</span></h4>
+                        <div  className="progress mb-4">
+                        <div  className="progress-bar" role="progressbar" style={{width: e.porcentaje +'%' }} aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                      </div>);
                   })}
                 </div>
               </div>
@@ -172,6 +172,7 @@ export default class Productos extends React.Component{
                             <CanvasJSChart options = {optionsAtencion}/>
                             </div>
                             <h5>Total Pedidos: {this.state.prestamos.length}</h5>
+                            
                         </div>
                       </div>
                     </div>
