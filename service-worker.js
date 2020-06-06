@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/papayapp-analytics/precache-manifest.6575a54fab061848857daafbeb5c4dcc.js"
+  "/papayapp-analytics/precache-manifest.51c961bb29c976fa95593ee6566e91b5.js"
 );
 
 self.addEventListener('message', (event) => {
