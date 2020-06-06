@@ -174,7 +174,7 @@ export default class Usuarios extends React.Component{
               min=actual.y;
             }
           }
-          return "El local en el que se realizan menos pedidos es el número "+ this.state.tablaPagos[indiceRta].label + " con un total de " +this.state.tablaPagos[indiceRta].y + " pedidos";
+          return "El usuario que menos pedidos paga es  "+ this.state.tablaPagos[indiceRta].label + " con un total de " +this.state.tablaPagos[indiceRta].y + " pedidos pagados";
         }
       }
       
