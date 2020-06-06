@@ -192,7 +192,7 @@ export default class Usuarios extends React.Component{
                 })
                 prom = suma/this.state.table.length
             }
-            return "El número de usuarios promedio por local es: " +prom;
+            return "El número de usuarios promedio por local es: " +prom.toFixed(2);
           }
           else{
             if(this.state.table2.length !==0){
@@ -201,7 +201,7 @@ export default class Usuarios extends React.Component{
                 })
                 prom = suma/this.state.table2.length
             }
-            return "El número de pedidos promedio por local es: " +prom;
+            return "El número de pedidos promedio por local es: " +prom.toFixed(2);
           }
 
       }
@@ -289,7 +289,7 @@ export default class Usuarios extends React.Component{
 			exportEnabled: true,
 			theme: "light2", //"light1", "dark1", "dark2"
 			title:{
-        text: "Solicitudes Realizadas por usuario",
+        text: "Solicitudes Totales por usuario",
         fontSize: 25,
         fontColor: "black"
             },
@@ -446,7 +446,7 @@ export default class Usuarios extends React.Component{
                           <thead>
                                 <tr>
                                 <th scope="col">Número del local</th>
-                                <th scope="col">Usuarios que usan la app</th>
+                                <th scope="col">Usuarios que tienen la app</th>
                                 </tr>
                             </thead>
                             <tbody>
