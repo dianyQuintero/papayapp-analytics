@@ -11,6 +11,7 @@ var grafica3 =[];
 var locales =[];
 var tabla =[];
 var tabla2 =[];
+var tablaPag = [];
 
 
 export default class Usuarios extends React.Component{
@@ -26,6 +27,7 @@ export default class Usuarios extends React.Component{
           grafTot:[],
           table:[],
           table2:[],
+          tablaPagos:[],
 
         };
       }
@@ -48,6 +50,7 @@ export default class Usuarios extends React.Component{
               this.state.usuarios.forEach(u=>{
                 var countPide = 0;
                 var countPresta = 0;
+                var countPago = 0;
                 
                 if(!locales.includes(u.data().local)){
                     locales.push(u.data().local)
@@ -56,6 +59,10 @@ export default class Usuarios extends React.Component{
                 this.state.prestamos.forEach(p=>{
                   if(u.id===p.recibe.id){
                     countPide++;
+                    if(p.estado  !== null && p.estado !== undefined){
+                        countPago++;
+                    }
+
                   }
                   if(p.presta !== null && u.id===p.presta.id) {
                     countPresta++;}
@@ -63,6 +70,7 @@ export default class Usuarios extends React.Component{
                 grafica1.push({label: u.data().email, y: countPide})
                 grafica2.push({label: u.data().email, y: countPresta})
                 grafica3.push({label: u.data().email, y: countPide+countPresta})
+                tablaPag.push({label: u.data().email, y: countPago})
 
               })
                          
@@ -71,6 +79,7 @@ export default class Usuarios extends React.Component{
                     grafPresta : grafica2,
                     grafTot: grafica3,
                     stands : locales,
+                    tablaPagos : tablaPag,
                   })
                   if(this.state.stands.length !== 0){
                     this.state.stands.forEach(e=>{
@@ -135,9 +144,41 @@ export default class Usuarios extends React.Component{
               max=actual.y;
             }
           }
-          return "El usuario que más presta es "+ this.state.grafPide[indiceRta].label + " con un total de " +this.state.grafPresta[indiceRta].y + " pedidos";
+          return "El usuario que más presta es "+ this.state.grafPresta[indiceRta].label + " con un total de " +this.state.grafPresta[indiceRta].y + " pedidos";
         }
       }
+
+      masPaga(){
+        var max = 0;
+        var indiceRta= 0;
+        if(this.state.tablaPagos.length !==0){
+          for (const key in this.state.tablaPagos) {
+            var actual = this.state.tablaPagos[key]
+            if (actual.y > max) {
+              indiceRta = key;
+              max=actual.y;
+            }
+          }
+          return "El usuario que más pedidos paga es "+ this.state.tablaPagos[indiceRta].label + " con un total de " +this.state.tablaPagos[indiceRta].y + " pedidos pagados";
+        }
+      }
+
+      menosPaga(){
+        var min = Number.MAX_SAFE_INTEGER;
+        var indiceRta= 0;
+        if(this.state.tablaPagos.length !==0){
+          for (const key in this.state.tablaPagos) {
+            var actual = this.state.tablaPagos[key]
+            if (actual.y < min) {
+              indiceRta = key;
+              min=actual.y;
+            }
+          }
+          return "El local en el que se realizan menos pedidos es el número "+ this.state.tablaPagos[indiceRta].label + " con un total de " +this.state.tablaPagos[indiceRta].y + " pedidos";
+        }
+      }
+      
+
       localMasPide(){
         var max = 0;
         var indiceRta= 0;
@@ -433,6 +474,60 @@ export default class Usuarios extends React.Component{
                         </div>
                     </div>
                     </div>
+                    <br></br>
+                    <div  className="card shadow mb-4">
+                    <div  className="card-body">
+
+                    <div className="row" >
+                        <div className="col-6">
+                        <div  id="Card2" className="card border-left-primary shadow h-100 py-2">
+                                <div  className="card-body">
+                                <div  className="row no-gutters align-items-center">
+                                    <div  className="col mr-2">
+                                    <div  id="titCard2" className="text-xs font-weight-bold text-uppercase mb-1">Usuario que más paga</div>
+                                        <div  className="h5 mb-0 font-weight-bold text-gray-800">{this.masPaga()}</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-6">
+                            <div  id="Card3" className="card border-left-primary shadow h-100 py-2">
+                                <div  className="card-body">
+                                <div  className="row no-gutters align-items-center">
+                                    <div  className="col mr-2">
+                                    <div  id="titCard3" className="text-xs font-weight-bold text-uppercase mb-1">Usuario que menos paga</div>
+                                        <div  className="h5 mb-0 font-weight-bold text-gray-800">{this.menosPaga()}</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row mx-auto">
+                        <div className ="col-12">
+                        <table className="table table-sm">
+                          <thead>
+                                <tr>
+                                <th scope="col">Email</th>
+                                <th scope="col">Pedidos pagados</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {this.state.tablaPagos.map(e =>{
+                                return(
+                                    <tr>
+                                        <td>{e.label}</td>
+                                        <td>{e.y}</td>
+                                    </tr>
+                                );
+                            })}
+                            </tbody>
+                          </table>
+                        </div>
+                    </div>
+              </div>
               <br></br>
               <div className="row">
                   <div className ="col-6">
